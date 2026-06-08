@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冯翰铭 | Embedded Motion Log</title>
+  <meta
+    name="description"
+    content="冯翰铭的个人博客主页，聚焦嵌入式开发、无刷电机 FOC、硬件系统设计与工程项目实践。"
+  >
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top">
+        <span class="brand-mark">FH</span>
+        <span class="brand-text">
+          <strong>冯翰铭</strong>
+          <small>Embedded Motion Log</small>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="#about">关于</a>
+        <a href="#projects">项目</a>
+        <a href="#timeline">时间线</a>
+        <a href="#awards">奖项</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero reveal" id="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">PERSONAL BLOG / CONTROL SYSTEMS / HARDWARE</p>
+          <h1>把电机、代码和板级调试，写成自己的工程日志。</h1>
+          <p class="hero-intro">
+            我是冯翰铭，郑州轻工业大学物联网工程本科在读，长期关注嵌入式控制、
+            无刷电机 FOC、PCB 设计和真实硬件系统落地。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">看项目</a>
+            <a class="button button-secondary" href="#contact">联系我</a>
+          </div>
+          <ul class="hero-tags">
+            <li>C/C++</li>
+            <li>STM32H7</li>
+            <li>FOC</li>
+            <li>PCB</li>
+            <li>Protocol Design</li>
+          </ul>
+        </div>
+
+        <aside class="hero-panel">
+          <div class="panel-grid"></div>
+          <div class="panel-card panel-card-main">
+            <span class="panel-label">Live Status</span>
+            <h2>在做的事情</h2>
+            <p>无感 FOC、实时控制链路、串口协议和驱动板调试，是当前最核心的工程主线。</p>
+          </div>
+          <div class="panel-card stat-card">
+            <span class="panel-label">Focus</span>
+            <strong>80us</strong>
+            <p>控制周期</p>
+          </div>
+          <div class="panel-card stat-card">
+            <span class="panel-label">Now</span>
+            <strong id="clock">--:--</strong>
+            <p>北京时间</p>
+          </div>
+          <div class="panel-card panel-card-note">
+            <span class="panel-label">Mindset</span>
+            <p>偏爱“能跑、能测、能定位问题”的工程结果，而不是停留在纸面方案。</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="notes reveal" id="about">
+        <div class="section-heading">
+          <span class="section-index">01</span>
+          <div>
+            <p class="section-kicker">ABOUT / FIELD NOTES</p>
+            <h2>我更像是在写一份持续更新的实验记录。</h2>
+          </div>
+        </div>
+        <div class="notes-grid">
+          <article class="note-card">
+            <span class="note-meta">Current Thread</span>
+            <h3>无感 FOC 不是公式堆砌，而是控制链路闭环之后的系统稳定性。</h3>
+            <p>
+              从采样、SVPWM 输出、观测器到保护策略，我更关心各环节怎么在真实硬件里一起工作。
+            </p>
+          </article>
+          <article class="note-card">
+            <span class="note-meta">Engineering Habit</span>
+            <h3>协议设计和固件开发，最终都要回到“时序是否可靠，现场是否好调”。</h3>
+            <p>
+              所以我会同时关注中断架构、命令队列、调试链路，以及文档是否足够清楚。
+            </p>
+          </article>
+          <article class="note-card">
+            <span class="note-meta">Background</span>
+            <h3>郑州轻工业大学 · 物联网工程 · 本科</h3>
+            <p>
+              2024.09 - 2028.06。校电子科技协会会长，组织技术培训与校级电子设计竞赛。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="projects reveal" id="projects">
+        <div class="section-heading">
+          <span class="section-index">02</span>
+          <div>
+            <p class="section-kicker">PROJECTS / BUILD LOG</p>
+            <h2>两个最能代表我工程方法的项目。</h2>
+          </div>
+        </div>
+
+        <div class="project-list">
+          <article class="project-card">
+            <div class="project-topline">
+              <span class="project-date">2025.12 - 2026.05</span>
+              <span class="project-type">核心算法 / 驱动板</span>
+            </div>
+            <h3>水下无人机双无刷推进器无感 FOC 驱动系统</h3>
+            <p class="project-summary">
+              面向 AUV 双推进器，主导无感 FOC 控制算法与驱动板 PCB 设计，基于
+              STM32H723 搭建电流采样、SVPWM 输出与闭环调速链路，实测支持正反转闭环。
+            </p>
+            <ul class="project-points">
+              <li>构建 80us 控制周期主循环，接入高级定时器互补输出、16 位 ADC + DMA 与缓存一致性处理。</li>
+              <li>实现 SMO + PLL 转子位置与速度观测，结合动态反电动势滤波和角度补偿降低抖动。</li>
+              <li>设计三段式启动流程、换向停机保护、HFI 融合与弱磁控制框架。</li>
+            </ul>
+            <a class="project-link" href="https://github.com/yul78/STM32H723ZGT6_ROV.git" target="_blank" rel="noreferrer">
+              查看项目仓库
+            </a>
+          </article>
+
+          <article class="project-card project-card-accent">
+            <div class="project-topline">
+              <span class="project-date">2025.06 - 2025.09</span>
+              <span class="project-type">公司落地 / 固件开发</span>
+            </div>
+            <h3>LSC-DC12/24 机器视觉光源控制器</h3>
+            <p class="project-summary">
+              参与 4 触发 4 输出与 2 触发 6 输出两系列控制器固件开发，覆盖 255 级 PWM 调光、
+              RS232 上位机控制、硬件触发和多路时序输出。
+            </p>
+            <ul class="project-points">
+              <li>定义 11 字节二进制帧协议，支持模式、亮度、延时与触发配置，并加入 CRC-8-MAXIM 校验。</li>
+              <li>基于 HK32F030M、TIM1 与 TIM6 完成常亮、频闪、延时触发，适配相机曝光同步。</li>
+              <li>采用 UART RXNE + IDLE 收帧与环形命令队列，降低中断和业务逻辑耦合。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="timeline reveal" id="timeline">
+        <div class="section-heading">
+          <span class="section-index">03</span>
+          <div>
+            <p class="section-kicker">TIMELINE / EDUCATION / ROLES</p>
+            <h2>从校内训练到项目落地，主线一直很清晰。</h2>
+          </div>
+        </div>
+
+        <div class="timeline-list">
+          <article class="timeline-item">
+            <span class="timeline-date">2024.09 - 2028.06</span>
+            <div>
+              <h3>郑州轻工业大学 · 物联网工程 · 本科</h3>
+              <p>系统学习嵌入式开发基础，持续把课程能力迁移到真实硬件项目。</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">大学阶段</span>
+            <div>
+              <h3>校电子科技协会会长</h3>
+              <p>负责协会日常管理、技术培训与竞赛组织，组织校级“星光杯”电子设计大赛。</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-date">长期关注</span>
+            <div>
+              <h3>嵌入式控制 / PCB / 电机算法</h3>
+              <p>大一参与 ACM 校队竞选与集训，随后持续聚焦嵌入式控制、PCB 绘制与无刷电机 FOC。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="skills reveal" id="skills">
+        <div class="section-heading">
+          <span class="section-index">04</span>
+          <div>
+            <p class="section-kicker">SKILLS / TOOLCHAIN</p>
+            <h2>我的能力更偏系统集成，而不是单点堆栈。</h2>
+          </div>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3>语言与固件</h3>
+            <p>熟悉 C/C++，具备裸机开发、状态机设计、串口协议解析和基础数据结构能力。</p>
+            <div class="skill-bar"><span style="width: 90%"></span></div>
+          </article>
+          <article class="skill-card">
+            <h3>MCU 与外设</h3>
+            <p>熟悉 STM32H7、HK32F030M，掌握 TIM/PWM、ADC DMA、UART/RS232、Flash 等驱动。</p>
+            <div class="skill-bar"><span style="width: 88%"></span></div>
+          </article>
+          <article class="skill-card">
+            <h3>电机控制</h3>
+            <p>熟悉 FOC、SVPWM、Clarke/Park 变换、SMO、PLL、弱磁与 HFI 基础。</p>
+            <div class="skill-bar"><span style="width: 86%"></span></div>
+          </article>
+          <article class="skill-card">
+            <h3>硬件与调试</h3>
+            <p>具备 PCB 绘制、焊接调试、电流采样与功率驱动链路排查经验，熟练使用示波器等仪器。</p>
+            <div class="skill-bar"><span style="width: 84%"></span></div>
+          </article>
+          <article class="skill-card">
+            <h3>工具链</h3>
+            <p>熟悉 Keil、STM32CubeMX、串口调试工具与 Git，能输出通信协议文档并协作管理代码。</p>
+            <div class="skill-bar"><span style="width: 82%"></span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="awards reveal" id="awards">
+        <div class="section-heading">
+          <span class="section-index">05</span>
+          <div>
+            <p class="section-kicker">AWARDS / ARCHIVE</p>
+            <h2>可公开展示的成绩，应该是结果，不是扫描件。</h2>
+          </div>
+        </div>
+
+        <div class="award-grid">
+          <article class="award-card">
+            <span class="award-year">2025</span>
+            <h3>蓝桥杯 C/C++ 程序设计</h3>
+            <p>国家三等奖</p>
+          </article>
+          <article class="award-card">
+            <span class="award-year">2026</span>
+            <h3>中国计算机设计大赛</h3>
+            <p>省三等奖</p>
+          </article>
+          <article class="award-card">
+            <span class="award-year">2025</span>
+            <h3>中国机械工程创新创意大赛</h3>
+            <p>省二等奖</p>
+          </article>
+        </div>
+
+        <p class="privacy-note">
+          站点中未直接公开成绩单、四六级与证书扫描件，以避免暴露身份证号、准考证号等敏感信息。
+        </p>
+      </section>
+
+      <section class="contact reveal" id="contact">
+        <div class="section-heading">
+          <span class="section-index">06</span>
+          <div>
+            <p class="section-kicker">CONTACT / NEXT STEP</p>
+            <h2>如果你也在做控制系统、嵌入式产品或者硬件项目，可以直接联系我。</h2>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <a href="tel:15516189556">155-1618-9556</a>
+          <a href="mailto:15516189556@163.com">15516189556@163.com</a>
+          <a href="https://github.com/52debugder" target="_blank" rel="noreferrer">github.com/52debugder</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
