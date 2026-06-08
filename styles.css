@@ -2,14 +2,12 @@
   --bg: #0c1017;
   --bg-soft: #111826;
   --panel: rgba(18, 27, 42, 0.74);
-  --panel-strong: rgba(12, 19, 31, 0.92);
   --text: #edf3f7;
   --muted: #9fb2c7;
   --line: rgba(160, 190, 215, 0.18);
   --signal: #76e1ff;
   --signal-deep: #1299bf;
   --accent: #ff9f68;
-  --accent-soft: rgba(255, 159, 104, 0.16);
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
   --radius: 28px;
 }
@@ -115,11 +113,9 @@ a {
 .eyebrow,
 .section-kicker,
 .panel-label,
-.note-meta,
-.project-date,
-.project-type,
-.award-year,
-.timeline-date {
+.post-label,
+.stream-tag,
+.archive-title {
   font-family: "Cascadia Code", "Consolas", monospace;
 }
 
@@ -127,12 +123,13 @@ a {
 .site-nav a,
 .hero-intro,
 .panel-card p,
-.note-card p,
-.project-summary,
-.project-points,
-.timeline-item p,
-.skill-card p,
-.privacy-note {
+.feature-main p,
+.mini-post p,
+.side-card p,
+.stream-card p,
+.topic-card p,
+.privacy-note,
+.compact-list li {
   color: var(--muted);
 }
 
@@ -162,11 +159,10 @@ main {
 }
 
 .hero,
-.notes,
-.projects,
-.timeline,
-.skills,
-.awards,
+.blog-home,
+.stream,
+.topics,
+.archive,
 .contact {
   position: relative;
   overflow: hidden;
@@ -178,7 +174,7 @@ main {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.15fr 0.95fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: 24px;
   padding: 42px;
 }
@@ -186,32 +182,25 @@ main {
 .eyebrow,
 .section-kicker,
 .panel-label,
-.note-meta,
-.project-topline,
-.award-year,
-.timeline-date {
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.eyebrow,
-.section-kicker,
-.panel-label,
-.note-meta {
+.post-label,
+.stream-tag,
+.archive-title {
   color: var(--signal);
   font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .hero h1,
 .section-heading h2 {
   margin: 0;
-  line-height: 1.02;
+  line-height: 1.04;
   font-family: Georgia, "STZhongsong", serif;
 }
 
 .hero h1 {
   max-width: 12ch;
-  font-size: clamp(2.5rem, 4.8vw, 4.5rem);
+  font-size: clamp(2.6rem, 4.8vw, 4.6rem);
 }
 
 .hero-intro {
@@ -263,7 +252,8 @@ main {
   list-style: none;
 }
 
-.hero-tags li {
+.hero-tags li,
+.topic-tags span {
   padding: 10px 14px;
   border: 1px solid rgba(118, 225, 255, 0.18);
   border-radius: 999px;
@@ -300,8 +290,12 @@ main {
   backdrop-filter: blur(16px);
 }
 
-.panel-card-main {
+.panel-card-main,
+.panel-card-note {
   grid-column: span 2;
+}
+
+.panel-card-main {
   align-self: end;
 }
 
@@ -318,7 +312,6 @@ main {
 }
 
 .panel-card-note {
-  grid-column: span 2;
   border-color: rgba(255, 159, 104, 0.18);
   background: linear-gradient(180deg, rgba(255, 159, 104, 0.12), rgba(8, 13, 22, 0.72));
 }
@@ -351,174 +344,123 @@ main {
   margin: 0 0 10px;
 }
 
-.notes-grid,
-.skills-grid,
-.award-grid {
+.home-grid,
+.stream-list,
+.topic-grid,
+.archive-grid {
   display: grid;
   gap: 18px;
   padding: 28px 32px 32px;
 }
 
-.notes-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.home-grid {
+  grid-template-columns: 1.25fr 0.75fr;
 }
 
-.note-card,
-.skill-card,
-.award-card,
-.project-card,
-.timeline-item,
+.home-main,
+.feature-stack,
+.home-side {
+  display: grid;
+  gap: 18px;
+}
+
+.feature-main,
+.mini-post,
+.side-card,
+.stream-card,
+.topic-card,
+.archive-card,
 .contact-card {
   border: 1px solid var(--line);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.03);
 }
 
-.note-card {
-  padding: 24px;
-}
-
-.note-card h3 {
-  margin: 10px 0 10px;
-  font-size: 1.28rem;
-  line-height: 1.35;
-}
-
-.note-card p {
-  line-height: 1.75;
-}
-
-.project-list,
-.timeline-list {
-  display: grid;
-  gap: 18px;
-  padding: 28px 32px 32px;
-}
-
-.project-card {
+.feature-main {
   padding: 28px;
   background:
-    linear-gradient(160deg, rgba(118, 225, 255, 0.04), transparent 28%),
+    linear-gradient(160deg, rgba(118, 225, 255, 0.05), transparent 28%),
     rgba(255, 255, 255, 0.03);
 }
 
-.project-card-accent {
-  background:
-    linear-gradient(160deg, rgba(255, 159, 104, 0.08), transparent 30%),
-    rgba(255, 255, 255, 0.03);
+.feature-main h3 {
+  margin: 12px 0 14px;
+  font-size: 2rem;
+  line-height: 1.2;
 }
 
-.project-topline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.project-date,
-.project-type {
-  font-size: 0.8rem;
-  color: var(--signal);
-}
-
-.project-type {
-  color: var(--accent);
-}
-
-.project-card h3 {
-  margin: 0;
-  font-size: 1.8rem;
-}
-
-.project-summary {
-  margin-top: 14px;
+.feature-main p,
+.mini-post p,
+.side-card p,
+.stream-card p,
+.topic-card p {
   line-height: 1.75;
 }
 
-.project-points {
-  margin: 18px 0 0;
-  padding-left: 20px;
+.feature-points,
+.compact-list {
+  margin: 16px 0 0;
+  padding-left: 18px;
   line-height: 1.8;
 }
 
-.project-link {
-  display: inline-flex;
-  margin-top: 18px;
-  color: var(--signal);
-  font-weight: 700;
-}
-
-.timeline-item {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 16px;
-  padding: 24px;
-}
-
-.timeline-date {
-  color: var(--accent);
-  font-size: 0.84rem;
-}
-
-.timeline-item h3,
-.skill-card h3,
-.award-card h3 {
-  margin: 0 0 10px;
-}
-
-.skills-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.skill-card {
+.mini-post,
+.side-card,
+.stream-card,
+.topic-card,
+.archive-card {
   padding: 22px;
 }
 
-.skill-bar {
-  height: 10px;
-  margin-top: 18px;
-  overflow: hidden;
+.mini-post h3,
+.side-card h3,
+.stream-card h3,
+.topic-card h3 {
+  margin: 10px 0;
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+.side-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.side-links a {
+  padding: 10px 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.skill-bar span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--signal-deep), var(--signal));
-}
-
-.award-grid {
+.stream-list {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.award-card {
-  position: relative;
-  padding: 24px;
-  overflow: hidden;
+.stream-tag {
+  color: var(--accent);
 }
 
-.award-card::after {
-  content: "";
-  position: absolute;
-  inset: auto -40px -40px auto;
-  width: 130px;
-  height: 130px;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 159, 104, 0.22), transparent 68%);
+.topic-grid,
+.archive-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.award-year {
+.topic-card:last-child {
+  grid-column: span 3;
+}
+
+.topic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.archive-title {
   display: inline-block;
   margin-bottom: 12px;
-}
-
-.award-card p {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  color: var(--muted);
 }
 
 .privacy-note {
@@ -542,8 +484,17 @@ main {
   word-break: break-all;
 }
 
-.contact-card a:hover {
+.contact-card a:hover,
+.project-link:hover,
+.side-links a:hover {
   color: var(--signal);
+}
+
+.project-link {
+  display: inline-flex;
+  margin-top: 18px;
+  color: var(--signal);
+  font-weight: 700;
 }
 
 .reveal {
@@ -557,9 +508,16 @@ main {
   transform: translateY(0);
 }
 
-@media (max-width: 980px) {
-  .hero {
+@media (max-width: 1024px) {
+  .hero,
+  .home-grid,
+  .stream-list,
+  .topic-grid,
+  .archive-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero {
     padding: 28px;
   }
 
@@ -567,14 +525,8 @@ main {
     max-width: none;
   }
 
-  .notes-grid,
-  .skills-grid,
-  .award-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .timeline-item {
-    grid-template-columns: 1fr;
+  .topic-card:last-child {
+    grid-column: auto;
   }
 }
 
@@ -594,11 +546,10 @@ main {
   }
 
   .hero,
-  .notes,
-  .projects,
-  .timeline,
-  .skills,
-  .awards,
+  .blog-home,
+  .stream,
+  .topics,
+  .archive,
   .contact {
     border-radius: 22px;
   }
@@ -607,28 +558,23 @@ main {
     min-height: auto;
   }
 
-  .panel-card-main,
-  .panel-card-note {
-    grid-column: span 2;
-  }
-
   .section-heading,
-  .notes-grid,
-  .project-list,
-  .timeline-list,
-  .skills-grid,
-  .award-grid,
+  .home-grid,
+  .stream-list,
+  .topic-grid,
+  .archive-grid,
   .privacy-note,
   .contact-card {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  .project-card,
-  .timeline-item,
-  .note-card,
-  .skill-card,
-  .award-card {
+  .feature-main,
+  .mini-post,
+  .side-card,
+  .stream-card,
+  .topic-card,
+  .archive-card {
     padding: 20px;
   }
 }
@@ -642,9 +588,9 @@ main {
     padding: 18px;
   }
 
+  .stat-card,
   .panel-card-main,
-  .panel-card-note,
-  .stat-card {
+  .panel-card-note {
     grid-column: span 2;
   }
 }
